@@ -2,8 +2,8 @@ import socket
 import sys
 import zlib
 
-sock_cli = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock_cli.connect((sys.argv[1], int(sys.argv[2])))
+sock_srv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+sock_srv.connect((sys.argv[1], int(sys.argv[2])))
 
 sock_chs = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 sock_chs.connect((sys.argv[3], int(sys.argv[4])))
@@ -14,7 +14,7 @@ filePath = sys.argv[6]
 finish = False
 
 while not finish:
-    cli, addr = sock_cli.accept()
+    cli, addr = sock_srv.accept()
     msg = cli.recv(1024)
     msg_unpacked = msg.decode('UTF-8')
     txt = ""
@@ -26,7 +26,7 @@ while not finish:
     with open(filePath) as f:
         f.write(txt)
     f.close
-sock_cli.close()
+sock_srv.close()
 
 crc = hex(zlib.crc32((txt).encode('UTF-8')) % (1 << 32))
 

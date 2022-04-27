@@ -3,10 +3,10 @@ import sys
 import zlib
 
 sock_srv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock_srv.connect((sys.argv[1], int(sys.argv[2])))
+sock_srv.bind((sys.argv[1], int(sys.argv[2])))
 
 sock_chs = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-sock_chs.bind(sys.argv[3], int(sys.argv[4]))
+sock_chs.connect((sys.argv[3], int(sys.argv[4])))
 
 fileId = sys.argv[5]
 filePath = sys.argv[6]

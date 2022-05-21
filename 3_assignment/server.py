@@ -1,6 +1,6 @@
 import random
 from socket import *
-from select import *
+
 import sys
 import struct
 
